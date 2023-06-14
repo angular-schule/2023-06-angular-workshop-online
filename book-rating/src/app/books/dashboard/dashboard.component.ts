@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from "../book/book.component";
 
@@ -8,7 +8,7 @@ import { BookComponent } from "../book/book.component";
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
-    imports: [CommonModule, BookComponent]
+    imports: [NgFor, BookComponent]
 })
 export class DashboardComponent {
 
