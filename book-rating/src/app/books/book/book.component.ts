@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Book } from '../shared/book';
+import { RatingComponent } from '../rating/rating.component';
 
 @Component({
   selector: 'app-book',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, RatingComponent],
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })

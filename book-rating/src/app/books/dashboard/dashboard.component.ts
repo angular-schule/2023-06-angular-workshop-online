@@ -4,11 +4,11 @@ import { Book } from '../shared/book';
 import { BookComponent } from "../book/book.component";
 
 @Component({
-    selector: 'app-dashboard',
-    standalone: true,
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss'],
-    imports: [NgFor, BookComponent]
+  selector: 'app-dashboard',
+  standalone: true,
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
+  imports: [NgFor, BookComponent]
 })
 export class DashboardComponent {
 
