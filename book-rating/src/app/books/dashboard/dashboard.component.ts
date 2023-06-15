@@ -32,5 +32,13 @@ export class DashboardComponent {
       }
     ];
   }
+
+  doRateUp(book: Book) {
+    console.log('UP', book);
+  }
+
+  doRateDown(book: Book) {
+    console.log('DOWN', book);
+  }
 }
 
