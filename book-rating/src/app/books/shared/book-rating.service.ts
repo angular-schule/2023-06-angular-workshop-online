@@ -6,13 +6,19 @@ import { Book } from './book';
 })
 export class BookRatingService {
 
-  constructor() { }
+  constructor() {}
 
   rateUp(book: Book): Book {
-    return book; // TODO
+    return {
+      ...book,
+      rating: Math.min(book.rating + 1, 5)
+    };
   }
 
   rateDown(book: Book): Book {
-    return book; // TODO
+    return {
+      ...book,
+      rating: book.rating > 1 ? book.rating - 1 : 1
+    };
   }
 }
