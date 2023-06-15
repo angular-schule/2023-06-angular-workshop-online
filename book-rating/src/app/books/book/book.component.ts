@@ -28,8 +28,4 @@ export class BookComponent {
   doRateDown() {
     this.rateDown.emit(this.book);
   }
-
-  log() {
-    console.log('CD', Date.now());
-  }
 }
