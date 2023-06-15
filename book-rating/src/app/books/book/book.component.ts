@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CurrencyPipe, NgIf } from '@angular/common';
 import { Book } from '../shared/book';
 import { RatingComponent } from '../rating/rating.component';
@@ -8,7 +8,8 @@ import { RatingComponent } from '../rating/rating.component';
   standalone: true,
   imports: [NgIf, RatingComponent, CurrencyPipe],
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.scss']
+  styleUrls: ['./book.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookComponent {
   // hier dürfen Daten von der Elternkomponente hineinfließen
@@ -26,5 +27,9 @@ export class BookComponent {
 
   doRateDown() {
     this.rateDown.emit(this.book);
+  }
+
+  log() {
+    console.log('CD', Date.now());
   }
 }

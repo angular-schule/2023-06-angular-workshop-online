@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from "../book/book.component";
@@ -12,6 +12,13 @@ import { BookRatingService } from '../shared/book-rating.service';
   imports: [NgFor, BookComponent]
 })
 export class DashboardComponent {
+
+  lastChange = signal(Date.now());
+  // lastChange = Date.now();
+  lastChangeSeconds = computed(() => this.lastChange() / 1000);
+
+  rating = signal(5);
+  starsArray = computed(() => new Array(this.rating));
 
   books: Book[] = [];
 
@@ -34,6 +41,11 @@ export class DashboardComponent {
         price: 36.9
       }
     ];
+  }
+
+  updateLastChange() {
+    // this.lastChange = Date.now();
+    this.lastChange.set(Date.now());
   }
 
   doRateUp(book: Book) {
