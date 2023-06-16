@@ -4,7 +4,6 @@ import { Book } from '../shared/book';
 import { BookComponent } from "../book/book.component";
 import { BookRatingService } from '../shared/book-rating.service';
 import { BookStoreService } from '../shared/book-store.service';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
