@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
+import { of } from 'rxjs';
+import { BookStoreService } from '../shared/book-store.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -13,12 +15,17 @@ describe('DashboardComponent', () => {
       rateUp: (b: Book) => b
     };
 
+    const storeMock = {
+      getAll: () => of([])
+    };
+
     TestBed.configureTestingModule({
       imports: [DashboardComponent],
       providers: [
         // BRS ersetzen: Immer, wenn jemand BRS anfordert,
         // wird stattdessen ratingMock ausgeliefert
-        { provide: BookRatingService, useValue: ratingMock }
+        { provide: BookRatingService, useValue: ratingMock },
+        { provide: BookStoreService, useValue: storeMock },
       ]
     });
     fixture = TestBed.createComponent(DashboardComponent);
