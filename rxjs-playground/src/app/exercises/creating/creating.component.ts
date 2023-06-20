@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of, from, timer, interval, ReplaySubject, map, filter, Observer, Subscriber, take } from 'rxjs';
+import { Observable, of, from, timer, interval, ReplaySubject, map, filter, Observer, Subscriber, take, partition, pipe } from 'rxjs';
 import { HistoryComponent } from '../../shared/history/history.component';
 
 @Component({
@@ -30,9 +30,30 @@ export class CreatingComponent {
     // timer(2000)           // ------0|
     // timer(4000, 1000)     // ------------0---1---2---3---4--- ...
 
-    timer(0, 1000).pipe(
-      map(e => e * 3),
+    const myCustomOperator = pipe(
+      map((e: number) => e * 3),
       filter(e => e % 2 === 0)
+    );
+
+    function myCustomOp2() {
+      return function (source$: Observable<number>): Observable<number> {
+        return source$.pipe(
+          map((e: number) => e * 3),
+          filter(e => e % 2 === 0)
+        );
+      }
+    }
+
+
+    function myCustomOp3(source$: Observable<number>): Observable<number> {
+      return source$.pipe(
+        map((e: number) => e * 3),
+        filter(e => e % 2 === 0)
+      );
+    }
+
+    timer(0, 1000).pipe(
+      myCustomOperator
     ).subscribe({
       next: e => this.log(e),
       error: e => console.log(e),
