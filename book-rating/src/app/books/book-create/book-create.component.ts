@@ -32,6 +32,7 @@ export class BookCreateComponent {
     rating: new FormControl(1, {
       nonNullable: true,
       validators: [
+        Validators.required,
         Validators.min(1),
         Validators.max(5)
       ]
@@ -39,11 +40,39 @@ export class BookCreateComponent {
     price: new FormControl(0, {
       nonNullable: true,
       validators: [Validators.min(0)]
-    })
+    }),
+    /*authors: new FormArray([
+      new FormControl('', { nonNullable: true }),
+      new FormControl('', { nonNullable: true }),
+      new FormControl('', { nonNullable: true }),
+      new FormControl('', { nonNullable: true }),
+    ])*/
   });
 
   submitForm() {
     // TODO
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.bookForm.get(controlName);
+
+    // Early Exit
+    if (!control) {
+      return false;
+    }
+
+    return control.touched && control.invalid;
+  }
+
+
+  hasError(controlName: string, errorCode: string): boolean {
+    const control = this.bookForm.get(controlName);
+
+    if (!control) {
+      return false;
+    }
+
+    return control.hasError(errorCode) && control.touched;
   }
 }
 

@@ -2,6 +2,13 @@
   <div class="form-group">
     <label for="isbnInput">ISBN</label>
     <input class="form-control" type="text" id="isbnInput" formControlName="isbn">
+
+    <div class="feedback-error" *ngIf="isInvalid('isbn')">Die ISBN ist ungültig.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'required')">Die ISBN muss angegeben werden.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'minlength')">Die ISBN ist zu kurz.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'maxlength')">Die ISBN ist zu lang.</div>
+
+    <pre>{{ bookForm.controls.isbn.errors | json }}</pre>
   </div>
 
   <div class="form-group">
@@ -23,6 +30,13 @@
     <label>Preis</label>
     <input class="form-control" type="number" formControlName="price">
   </div>
+
+
+  <!--<div formArrayName="authors">
+    <input type="text"
+      *ngFor="let c of bookForm.controls.authors.controls; index as i"
+      [formControlName]="i">
+  </div>-->
 
   <button type="submit" class="btn btn-success" [disabled]="bookForm.invalid">Abschicken</button>
 

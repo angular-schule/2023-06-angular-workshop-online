@@ -7,4 +7,5 @@ export const routes: Routes = [
     path: 'books',
     loadChildren: () => import('./books/books.routes').then(m => m.booksRoutes)
   }
+  // ...booksRoutes // weg wegen Lazy Loading
 ];
