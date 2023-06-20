@@ -8,6 +8,11 @@
     <div class="feedback-error" *ngIf="hasError('isbn', 'minlength')">Die ISBN ist zu kurz.</div>
     <div class="feedback-error" *ngIf="hasError('isbn', 'maxlength')">Die ISBN ist zu lang.</div>
 
+    <!--
+      // Ausblick
+      <app-form-errors controlName="isbn" [messages]="{ minlength: 'zu kurz' }"></app-form-errors>
+    -->
+
     <pre>{{ bookForm.controls.isbn.errors | json }}</pre>
   </div>
 
