@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject, ReplaySubject, scan, reduce } from 'rxjs';
+import { Subject, ReplaySubject, scan, reduce, startWith } from 'rxjs';
 import { HistoryComponent } from '../../shared/history/history.component';
 
 @Component({
@@ -25,6 +25,7 @@ export class GameScoreComponent {
     // [1,2,3,4,5].reduce((acc, item) => acc + item, 0) // 15
 
     this.score$.pipe(
+      startWith(1000),
       scan((acc, item) => acc + item, 0)
     ).subscribe(e => {
       this.currentScore = e;

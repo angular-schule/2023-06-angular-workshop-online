@@ -29,6 +29,7 @@ export class CreatingComponent {
     // interval(1000)        // ---0---1---2---3---4--- ...
     // timer(2000)           // ------0|
     // timer(4000, 1000)     // ------------0---1---2---3---4--- ...
+    // timer(0, 1000)        // 0---1---2---3---4--- ...
 
     const myCustomOperator = pipe(
       map((e: number) => e * 3),
@@ -53,7 +54,8 @@ export class CreatingComponent {
     }
 
     timer(0, 1000).pipe(
-      myCustomOperator
+      map((e: number) => e * 3),
+      filter(e => e % 2 === 0),
     ).subscribe({
       next: e => this.log(e),
       error: e => console.log(e),
@@ -64,11 +66,13 @@ export class CreatingComponent {
     /******************************/
 
     function producer(sub: Subscriber<number>) {
-      const result = Math.random();
-      sub.next(result);
+      sub.next(Math.random());
 
       const result2 = 1;
       sub.next(result2);
+      sub.next(100);
+      sub.next(111);
+      sub.next(222);
 
       const timer1 = setTimeout(() => sub.next(5), 2000);
       const timer2 = setTimeout(() => sub.complete(), 4000);
@@ -90,7 +94,9 @@ export class CreatingComponent {
     // producer(obs);
 
     const myObs$ = new Observable(producer);
-    // myObs$.subscribe(obs);
+    const sub = myObs$.subscribe(obs);
+
+    // sub.unsubscribe();
 
 
 
